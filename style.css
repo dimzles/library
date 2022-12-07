@@ -36,3 +36,17 @@ body {
     padding: 32px;
     gap: 8px;
 }
+
+.card {
+    background-color: white;
+    box-shadow: 1px 0 6px lightgray;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-text {
+    text-align: center;
+    margin: 0;
+}
