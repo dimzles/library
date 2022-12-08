@@ -12,10 +12,24 @@
     <div class="container">
         <div class="header">
             <p class="header-text">Library</p>
+
+            <button class="createBtn" id="createBtn">New Book</button>
         </div>
-        <div class="shelf" id="shelf">
-            
-        </div>
+        <div class="shelf" id="shelf"></div>
+            <div class="form-container" id="form-container">
+                <form action="#" method="#">
+                    <h3 class="form-title">Add New Book</h3>
+                    <input class="input" type="text" id="title" placeholder="Title" required maxlength="100">
+                    <input class="input" type="text" id="author" placeholder="Author" required maxlength="100">
+                    <input class="input" type="number" id="pages" placeholder="Pages" required max="10000">
+                    <div class="read-status">
+                        <label for="read-status">Have you read this book?</label>
+                        <input class="input-checkbox" type="checkbox" id="readStatus">
+                    </div>
+                    <button class="submitBtn" type="submit" id="submitBtn">Submit</button>
+                </form>
+            </div>
+        <div class="popup-container" id="popup-container"></div>
     </div>
 </body>
 </html>

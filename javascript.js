@@ -1,4 +1,9 @@
 const shelf = document.getElementById('shelf');
+const createBtn = document.getElementById('createBtn');
+const submitBtn = document.getElementById('submitBtn');
+const popupContainer = document.getElementById('popup-container');
+const formContainer = document.getElementById('form-container');
+
 const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', '295 pages', false);
 const harryPotter = new Book('Harry Potter and the Philosphers Stone', 'J. K. Rowling', '223 pages', true);
 const howToWinFriends = new Book('How to Win Friends and Influence People', 'Dale Carnegie', '275 pages', false);
@@ -14,7 +19,10 @@ function Book(title, author, pages, readStatus) {
 }
 
 Book.prototype.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages}, ${this.readStatus ? "read" : "unread"}.`
+    return `
+    ${this.title}
+    ${this.author}
+    ${this.pages}, ${this.readStatus ? "read" : "unread"}.`
 }
 
 function addBookToLibrary(...books) {
@@ -35,3 +43,13 @@ function createBooks() {
 
 addBookToLibrary(theHobbit, harryPotter, howToWinFriends, crushingIt);
 createBooks();
+
+createBtn.addEventListener('click', () => {
+    popupContainer.classList.add('active');
+    formContainer.classList.add('active');
+});
+
+popupContainer.addEventListener('click', () => {
+    popupContainer.classList.remove('active');
+    formContainer.classList.remove('active');
+})

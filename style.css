@@ -30,7 +30,8 @@ body {
 
 .shelf {
     display: grid;
-    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
     grid-area: 2 / 1 / 5 / 3;
     background-color: rgb(235, 235, 235);
     padding: 32px;
@@ -47,6 +48,97 @@ body {
 }
 
 .card-text {
+    white-space: pre-line;
     text-align: center;
     margin: 0;
+}
+
+.createBtn {
+    grid-area: 2 / 3;
+    border-style: none;
+    border-radius: 32px;
+    width: 50%;
+    height: 80%;
+    align-self: center;
+    justify-self: flex-end;
+    font-weight: bold;
+}
+
+.createBtn:hover {
+    background-color: black;
+    color:white;
+}
+
+.popup-container {
+    position: fixed;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 300px;
+    height: 50%;
+    border-radius: 16px;
+    border-style: none;
+    background-color: rgb(235, 235, 235);
+    text-align: center;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease-in-out;
+}
+
+.input {
+    height: 40px;
+    width: 90%;
+    justify-self: center;
+    margin: 0;
+    padding-left: 8px;
+    border-style: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.read-status {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 90%;
+}
+
+.form-container.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.active {
+    display: block;
+}
+
+.submitBtn {
+    font-size: 16px;
+    border-style: none;
+    color:white;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 50%;
+    padding: 8px;
+    background-color: rgb(128, 0, 187);
+}
+
+.submitBtn:hover {
+    background-color: rgb(87, 0, 128);
 }
