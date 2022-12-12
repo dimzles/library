@@ -1,8 +1,10 @@
+//Storing DOM Elements in variables
 const shelf = document.getElementById('shelf');
 const createBtn = document.getElementById('createBtn');
 const submitBtn = document.getElementById('submitBtn');
 const popupContainer = document.getElementById('popup-container');
 const formContainer = document.getElementById('form-container');
+const bookForm = document.getElementById('book-form');
 
 const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', '295 pages', false);
 const harryPotter = new Book('Harry Potter and the Philosphers Stone', 'J. K. Rowling', '223 pages', true);
@@ -29,7 +31,7 @@ function addBookToLibrary(...books) {
     return myLibrary.push(...books);
 }
 
-function createBooks() {
+function addBooksToShelf() {
     for(let i = 0; i < myLibrary.length; i++) {
         let card = document.createElement('div');
         card.classList.add('card');
@@ -41,8 +43,29 @@ function createBooks() {
     }
 }
 
-addBookToLibrary(theHobbit, harryPotter, howToWinFriends, crushingIt);
-createBooks();
+function handleFormValues() {
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const readStatus = document.getElementById('readStatus').value;
+    console.log(`${title}, ${author}, ${pages}, ${readStatus}`);
+    let newBook = new Book(title, author, pages, readStatus);
+    return myLibrary.push(newBook);
+}
+
+function removeActiveClass() {
+    popupContainer.classList.remove('active');
+    formContainer.classList.remove('active');
+}
+
+function updateBookGrid() {
+    removeBookGrid();
+    addBooksToShelf();
+}
+
+function removeBookGrid() {
+    shelf.innerHTML = '';
+}
 
 createBtn.addEventListener('click', () => {
     popupContainer.classList.add('active');
@@ -50,6 +73,15 @@ createBtn.addEventListener('click', () => {
 });
 
 popupContainer.addEventListener('click', () => {
-    popupContainer.classList.remove('active');
-    formContainer.classList.remove('active');
+    removeActiveClass();
 })
+
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    handleFormValues();
+    updateBookGrid();
+    removeActiveClass();
+});
+
+addBookToLibrary(theHobbit, harryPotter, howToWinFriends, crushingIt);
+addBooksToShelf();

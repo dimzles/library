@@ -15,16 +15,16 @@
 
             <button class="createBtn" id="createBtn">New Book</button>
         </div>
-        <div class="shelf" id="shelf"></div>
+            <div class="shelf" id="shelf"></div>
             <div class="form-container" id="form-container">
-                <form action="#" method="#">
+                <form id="book-form" action="#" method="#">
                     <h3 class="form-title">Add New Book</h3>
-                    <input class="input" type="text" id="title" placeholder="Title" required maxlength="100">
-                    <input class="input" type="text" id="author" placeholder="Author" required maxlength="100">
-                    <input class="input" type="number" id="pages" placeholder="Pages" required max="10000">
+                    <input class="input" type="text" name="title" id="title" placeholder="Title" required maxlength="100">
+                    <input class="input" type="text" id="author" name="author" placeholder="Author" required maxlength="100">
+                    <input class="input" type="number" id="pages" name="pages" placeholder="Pages" required max="10000">
                     <div class="read-status">
                         <label for="read-status">Have you read this book?</label>
-                        <input class="input-checkbox" type="checkbox" id="readStatus">
+                        <input class="input-checkbox" name="read-checkbox" type="checkbox" id="readStatus" required>
                     </div>
                     <button class="submitBtn" type="submit" id="submitBtn">Submit</button>
                 </form>
