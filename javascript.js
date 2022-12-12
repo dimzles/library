@@ -6,11 +6,6 @@ const popupContainer = document.getElementById('popup-container');
 const formContainer = document.getElementById('form-container');
 const bookForm = document.getElementById('book-form');
 
-const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', '295 pages', false);
-const harryPotter = new Book('Harry Potter and the Philosphers Stone', 'J. K. Rowling', '223 pages', true);
-const howToWinFriends = new Book('How to Win Friends and Influence People', 'Dale Carnegie', '275 pages', false);
-const crushingIt = new Book('Crushing It!', 'Gary Vaynerchuk', '288 pages', false);
-
 let myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -23,12 +18,9 @@ function Book(title, author, pages, readStatus) {
 Book.prototype.info = function () {
     return `
     ${this.title}
+    by
     ${this.author}
-    ${this.pages}, ${this.readStatus ? "read" : "unread"}.`
-}
-
-function addBookToLibrary(...books) {
-    return myLibrary.push(...books);
+    ${this.pages} pages, ${this.readStatus ? "read" : "unread"}.`;
 }
 
 function addBooksToShelf() {
@@ -47,10 +39,21 @@ function handleFormValues() {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
-    const readStatus = document.getElementById('readStatus').value;
+    const readStatus = document.getElementById('readStatus').checked;
     console.log(`${title}, ${author}, ${pages}, ${readStatus}`);
     let newBook = new Book(title, author, pages, readStatus);
     return myLibrary.push(newBook);
+}
+
+function resetFormValues() {
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+    const pages = document.getElementById('pages');
+    const readStatus = document.getElementById('readStatus');
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    readStatus.checked = false;
 }
 
 function removeActiveClass() {
@@ -81,7 +84,5 @@ submitBtn.addEventListener('click', (e) => {
     handleFormValues();
     updateBookGrid();
     removeActiveClass();
+    resetFormValues();
 });
-
-addBookToLibrary(theHobbit, harryPotter, howToWinFriends, crushingIt);
-addBooksToShelf();
