@@ -43,8 +43,10 @@ body {
     box-shadow: 1px 0 6px lightgray;
     border-radius: 32px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 32px;
 }
 
 .card-text {
@@ -141,4 +143,19 @@ form {
 
 .submitBtn:hover {
     background-color: rgb(87, 0, 128);
+}
+
+.removeBtn {
+    border-style: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: darkred;
+}
+
+.removeBtn:hover {
+    background-color: red;
 }
