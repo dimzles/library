@@ -1,37 +1,49 @@
-//Storing DOM Elements in variables
+//Storing elements in variables
 const shelf = document.getElementById('shelf');
 const createBtn = document.getElementById('createBtn');
 const submitBtn = document.getElementById('submitBtn');
 const popupContainer = document.getElementById('popup-container');
 const formContainer = document.getElementById('form-container');
 const bookForm = document.getElementById('book-form');
+const removeBtn = document.getElementsByClassName('removeBtn');
 
 let myLibrary = [];
 
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-}
-
-Book.prototype.info = function () {
-    return `
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
+    info() {
+        return `
     ${this.title}
     by
     ${this.author}
-    ${this.pages} pages, ${this.readStatus ? "read" : "unread"}.`;
+    ${this.pages} pages, ${this.readStatus ? 'read' : 'unread'}.`;
+    }
 }
+
 
 function addBooksToShelf() {
     for(let i = 0; i < myLibrary.length; i++) {
         let card = document.createElement('div');
         card.classList.add('card');
+        card.setAttribute('data-index', i);
         shelf.appendChild(card);
         let cardText = document.createElement('p');
         cardText.classList.add('card-text');
         card.appendChild(cardText);
         cardText.textContent = `${myLibrary[i].info()}`;
+        let removeBtn = document.createElement('button');
+        removeBtn.classList.add('removeBtn');
+        removeBtn.textContent = 'Remove';
+        card.appendChild(removeBtn);
+        removeBtn.addEventListener('click', () => {
+            myLibrary.splice(i, 1);
+            updateBookGrid();
+        })
     }
 }
 
@@ -62,11 +74,11 @@ function removeActiveClass() {
 }
 
 function updateBookGrid() {
-    removeBookGrid();
+    clearBookGrid();
     addBooksToShelf();
 }
 
-function removeBookGrid() {
+function clearBookGrid() {
     shelf.innerHTML = '';
 }
 
@@ -82,7 +94,7 @@ popupContainer.addEventListener('click', () => {
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     handleFormValues();
-    updateBookGrid();
     removeActiveClass();
     resetFormValues();
+    updateBookGrid();
 });
