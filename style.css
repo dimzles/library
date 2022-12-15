@@ -148,14 +148,38 @@ form {
 .removeBtn {
     border-style: none;
     border-radius: 8px;
-    width: 200px;
-    height: 50px;
+    padding: 0px 16px;
+    height: 40px;
     font-size: 20px;
     font-weight: bold;
-    color: white;
-    background-color: darkred;
 }
 
 .removeBtn:hover {
-    background-color: red;
+    background-color: black;
+    color: white;
+}
+
+.btnContainer {
+    display: flex;
+    gap: 32px;
+}
+
+.readBtn {
+    border-style: none;
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100px;
+}
+
+.unread {
+    background-color: darkred;
+    color: white;
+}
+
+.read {
+    background-color: lightgreen;
+    color: black;
 }
