@@ -6,6 +6,9 @@ const popupContainer = document.getElementById('popup-container');
 const formContainer = document.getElementById('form-container');
 const bookForm = document.getElementById('book-form');
 const removeBtn = document.getElementsByClassName('removeBtn');
+const readBtn = document.getElementsByClassName('readBtn');
+
+
 
 let myLibrary = [];
 
@@ -18,13 +21,19 @@ class Book {
     }
     info() {
         return `
-    ${this.title}
-    by
-    ${this.author}
-    ${this.pages} pages, ${this.readStatus ? 'read' : 'unread'}.`;
+        ${this.title}
+        by
+        ${this.author}
+        ${this.pages}, ${this.readStatus ? 'read' : 'unread'}.`;
+    }
+    toggleReadStatus() {
+        if (this.readStatus !== true) {
+            this.readStatus = true;
+            updateBookGrid();
+        } else this.readStatus = false;
+    updateBookGrid();
     }
 }
-
 
 function addBooksToShelf() {
     for(let i = 0; i < myLibrary.length; i++) {
@@ -32,18 +41,38 @@ function addBooksToShelf() {
         card.classList.add('card');
         card.setAttribute('data-index', i);
         shelf.appendChild(card);
+
         let cardText = document.createElement('p');
         cardText.classList.add('card-text');
         card.appendChild(cardText);
         cardText.textContent = `${myLibrary[i].info()}`;
+        
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('btnContainer');
+        card.appendChild(btnContainer);
+
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
         removeBtn.textContent = 'Remove';
-        card.appendChild(removeBtn);
+        btnContainer.appendChild(removeBtn);
         removeBtn.addEventListener('click', () => {
             myLibrary.splice(i, 1);
             updateBookGrid();
         })
+
+        let readBtn = document.createElement('button');
+        readBtn.classList.add('readBtn');
+        if(myLibrary[i].readStatus !== true) {
+            readBtn.classList.add('unread')
+            readBtn.textContent = `Unread`
+        } else {
+            readBtn.classList.add('read');
+            readBtn.textContent = `Read`;
+        }
+        btnContainer.appendChild(readBtn);
+        readBtn.addEventListener('click', () => {
+            myLibrary[i].toggleReadStatus()
+        });
     }
 }
 
