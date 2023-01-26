@@ -104,7 +104,6 @@ function updateBookGrid() {
   clearBookGrid();
   addBooksToShelf();
 }
-d;
 
 function clearBookGrid() {
   shelf.innerHTML = "";
