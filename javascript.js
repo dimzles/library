@@ -79,7 +79,6 @@ function handleFormValues() {
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
   const readStatus = document.getElementById("readStatus").checked;
-  console.log(`${title}, ${author}, ${pages}, ${readStatus}`);
   let newBook = new Book(title, author, pages, readStatus);
   return myLibrary.push(newBook);
 }
@@ -120,8 +119,24 @@ popupContainer.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  if (!checkFormValidity()) return;
   handleFormValues();
   removeActiveClass();
   resetFormValues();
   updateBookGrid();
 });
+
+function checkFormValidity() {
+  const inputs = Array.from(document.getElementsByClassName("input"));
+
+  let validityStatus = false;
+
+  for (let i = 0; i < inputs.length; i++) {
+    if (!inputs[i].checkValidity()) {
+      inputs[i].reportValidity();
+      return;
+    } else validityStatus = true;
+  }
+
+  return validityStatus;
+}
